@@ -32,5 +32,21 @@ class MainActivity : AppCompatActivity() {
                 messageEt.setText("")
             }
         }
+
+        activityMainBinding.sendBt.setOnClickListener {
+            activityMainBinding.apply {
+                Intent(ACTION_SENDTO).apply {
+                    putExtra(EXTRA_EMAIL, arrayOf(toEt.text.toString()))
+                    putExtra(EXTRA_CC, arrayOf(ccEt.text.toString()))
+                    putExtra(EXTRA_BCC, arrayOf(bccEt.text.toString()))
+                    putExtra(EXTRA_SUBJECT, arrayOf(subjectEt.text.toString()))
+                    putExtra(EXTRA_TEXT, arrayOf(messageEt.text.toString()))
+
+                    setDataAndType(Uri.parse("mailto:"), "message/rfc822")
+
+                    startActivity(this)
+                }
+            }
+        }
     }
 }
